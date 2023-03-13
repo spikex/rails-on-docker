@@ -1,0 +1,18 @@
+version: "3.7"
+
+services:
+  database:
+    image: postgis/postgis
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  app:
+    depends_on:
+      - database
+    environment:
+      - DATABASE_URL=postgis://postgres@database
+
+volumes:
+  db_data:

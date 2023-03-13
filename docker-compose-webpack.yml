@@ -1,0 +1,23 @@
+version: "3.7"
+
+services:
+  webpack:
+    build: .
+    command: ./bin/webpack-dev-server
+    ports:
+      - 3035:3035
+    volumes:
+      - .:/usr/src/app
+      - gem_cache:/gems
+      - node_modules:/usr/src/app/node_modules
+    environment:
+      - WEBPACKER_DEV_SERVER_HOST=0.0.0.0
+
+  app:
+    depends_on:
+      - webpack
+    environment:
+      - WEBPACKER_DEV_SERVER_HOST=webpack
+
+volumes:
+  node_modules:

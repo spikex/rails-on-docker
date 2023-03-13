@@ -1,0 +1,11 @@
+version: "3.7"
+
+services:
+  tailwind:
+    build: .
+    stdin_open: true
+    tty: true
+    command: bundle exec rails tailwindcss:watch
+    volumes:
+      - .:/usr/src/app
+      - gem_cache:/gems

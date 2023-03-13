@@ -1,0 +1,11 @@
+version: "3.7"
+
+services:
+  memcached:
+    image: memcached
+
+  app:
+    depends_on:
+      - memcached
+    environment:
+      - MEMCAHCED_HOST=mecached

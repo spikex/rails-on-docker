@@ -1,0 +1,23 @@
+version: "3.7"
+
+services:
+  database:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: database
+      MYSQL_RANDOM_ROOT_PASSWORD: "YES"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  app:
+    depends_on:
+      - database
+    environment:
+      - DATABASE_URL=mysql2://user:password@database
+
+volumes:
+  db_data:

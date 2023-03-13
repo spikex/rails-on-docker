@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  database:
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - db_data:/data/db
+
+  app:
+    depends_on:
+      - database
+    environment:
+      - DATABASE_URL=mongodb://root:password@database:27017/
+
+volumes:
+  db_data:

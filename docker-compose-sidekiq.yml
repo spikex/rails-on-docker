@@ -1,0 +1,18 @@
+version: "3.7"
+
+services:
+  sidekiq:
+    depends_on:
+      - redis
+    build: .
+    command: bundle exec sidekiq
+    environment:
+      - DATABASE_URL=postgresql://postgres@database
+      - REDIS_URL=redis://redis:6379/0
+    volumes:
+      - .:/usr/src/app
+      - gem_cache:/gems
+
+  app:
+    depends_on:
+      - sidekiq

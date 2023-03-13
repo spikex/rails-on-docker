@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+echo Testing Dockerfiles
+
+echo -n 'Dockerfile: '
+
+DOCKERFILE=Dockerfile
+
+if DOCKERFILE=$DOCKERFILE docker-compose build --no-cache -q; then
+  echo pass.
+else
+  echo fail.
+  echo Run "DOCKERFILE=$DOCKERFILE docker-compose build --no-cache" for details
+fi
+DOCKERFILE=$DOCKERFILE docker-compose rm -f -s -v -q
+
+echo -n 'Dockerfile-Node: '
+
+DOCKERFILE=Dockerfile-Node
+
+if DOCKERFILE=$DOCKERFILE docker-compose build --no-cache -q; then
+  echo Build succeed.
+else
+  echo Build failed.
+  echo Run "DOCKERFILE=$DOCKERFILE docker-compose build --no-cache" for details
+fi
+DOCKERFILE=$DOCKERFILE docker-compose rm -f -s -v
+
+echo Validating docker-compose files
+
+for f in ../docker-compose-*.yml
+do
+  echo -n "${f}: "
+  if COMPOSE_FILE=docker-compose.yml:${f} DOCKERFILE=Dockerfile docker-compose config -q; then
+    echo OK
+  else
+    echo Invalid
+  fi
+done

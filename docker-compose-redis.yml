@@ -1,0 +1,11 @@
+version: "3.7"
+
+services:
+  redis:
+    image: redis
+
+  app:
+    depends_on:
+      - redis
+    environment:
+      - REDIS_URL=redis://redis:6379/0

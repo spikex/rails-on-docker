@@ -1,0 +1,15 @@
+version: "3.7"
+
+services:
+  ngrok:
+    ports:
+      - "4040:4040"
+    image: wernight/ngrok
+    environment:
+      - NGROK_SUBDOMAIN=${NGROK_SUBDOMAIN}
+      - NGROK_AUTH=${NGROK_AUTH}
+      - NGROK_PORT=app:3000
+
+  app:
+    environment:
+      - APP_URL=${NGROK_SUBDOMAIN}.ngrok.io
