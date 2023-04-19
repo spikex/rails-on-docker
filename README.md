@@ -96,7 +96,7 @@ docker-compose build
 docker-compose run --rm app bundle exec rails new . --force --database=postgresql
 ```
 
-You can pass any other options you need to the new command and swap out the
+You can pass any other options you need to the new command, for example `--api`, and swap out the
 database type (swapping to matching Compose file as well). Be sure to leave the
 `--force` as that allows Rails to replace the bootstrap Gemfile with a real one.
 
@@ -179,8 +179,8 @@ If you are all in with Docker Compose you could take it a step further with:
 ```
 alias dc='docker-compose'
 alias bundle='dc exec app bundle'
-alias rails='dcb exec rails'
-alias rspec='dcb exec rspec'
+alias rails='bundle exec rails'
+alias rspec='bundle exec rspec'
 ```
 
 Note: There is a _dc_ command on most \*nix systems, including macOS, a
