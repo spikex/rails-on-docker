@@ -139,12 +139,12 @@ window.
 Because Rails lives inside Docker, you need to use `docker compose exec` to run
 commands:
 
-- Open the Rails console - `docker-compose exec web ./bin/rails c`
-- Adding Gems - `docker-compose exec web bundle add GEM_NAME` (or add the gem manually
-  to the Gemfile and run `docker-compose exec web bundle install`.
-- Creating migrations - `docker-compose exec web ./bin/rails g migration NAME ...`.
-- Running migrations - `docker-compose exec web ./bin/rails db:migrate`.
-- Running a shell - `docker-compose exec web bash`.
+- Open the Rails console - `docker-compose exec app ./bin/rails c`
+- Adding Gems - `docker-compose exec app bundle add GEM_NAME` (or add the gem manually
+  to the Gemfile and run `docker-compose exec app bundle install`.
+- Creating migrations - `docker-compose exec app ./bin/rails g migration NAME ...`.
+- Running migrations - `docker-compose exec app ./bin/rails db:migrate`.
+- Running a shell - `docker-compose exec app bash`.
 
 Debug, Pry, and Byebug can be a bit tricky. You need to "attach" to Docker
 first. This can be done by running the following in it's own window:
