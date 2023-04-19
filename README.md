@@ -118,8 +118,11 @@ docker-compose up
 then in another window run:
 
 ```
-docker-compose exec web ./bin/rails db:setup db:migrate db:seed
+docker-compose exec app ./bin/rails db:setup
 ```
+
+You will get a warning that "db/schema.rb doesn't exist yet", that's normal as
+you don't have any migrations yet.
 
 ## Running Rails
 
