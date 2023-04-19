@@ -56,6 +56,20 @@ line which reads:
 COMPOSE_FILE=docker-compose.yml:docker-compose-postgres.yml
 ```
 
+Then edit _Dockerfile_ and change the line that reads:
+
+```
+FROM ruby
+```
+
+to
+
+```
+FROM ruby:X.Y.Z
+```
+
+Where _X.Y.Z_ matches the Ruby version in your _Gemfile_ e.g. "3.2.2".
+
 Then run:
 
 ```
@@ -91,6 +105,9 @@ Once `rails new` completes, create/edit a _.env_ file and add:
 ```
 COMPOSE_FILE=docker-compose.yml:docker-compose-postgres.yml
 ```
+
+and edit _Dockerfile_ to pin the Ruby version to the one in your _Gemfile_
+e.g. `FROM ruby` -> `FROM ruby:3.2.2`.
 
 Run:
 
