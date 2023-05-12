@@ -73,7 +73,7 @@ Where _X.Y.Z_ matches the Ruby version in your _Gemfile_ e.g. "3.2.2".
 Then run:
 
 ```
-docker-compose build
+docker compose build
 ```
 
 ## Creating a New Rails App
@@ -92,8 +92,8 @@ cp Gemfile.bootstrap /path/to/my/new/project/Gemfile
 `cd` to the new directory and run:
 
 ```
-docker-compose build
-docker-compose run --rm app bundle exec rails new . --force --database=postgresql
+docker compose build
+docker compose run --rm app bundle exec rails new . --force --database=postgresql
 ```
 
 You can pass any other options you need to the new command, for example `--api`, and swap out the
@@ -112,13 +112,13 @@ e.g. `FROM ruby` -> `FROM ruby:3.2.2`.
 Run:
 
 ```
-docker-compose up
+docker compose up
 ```
 
 then in another window run:
 
 ```
-docker-compose exec app ./bin/rails db:setup
+docker compose exec app ./bin/rails db:setup
 ```
 
 You will get a warning that "db/schema.rb doesn't exist yet", that's normal as
@@ -127,11 +127,11 @@ you don't have any migrations yet.
 ## Running Rails
 
 ```
-docker-compose up
+docker compose up
 ```
 
 Your app should be accessible at http://localhost:3000 as usual. Edit files as
-you normally would. When you are finished, run `docker-compose down` in another
+you normally would. When you are finished, run `docker compose down` in another
 window.
 
 ## Common Tasks
@@ -139,18 +139,18 @@ window.
 Because Rails lives inside Docker, you need to use `docker compose exec` to run
 commands:
 
-- Open the Rails console - `docker-compose exec app ./bin/rails c`
-- Adding Gems - `docker-compose exec app bundle add GEM_NAME` (or add the gem manually
-  to the Gemfile and run `docker-compose exec app bundle install`.
-- Creating migrations - `docker-compose exec app ./bin/rails g migration NAME ...`.
-- Running migrations - `docker-compose exec app ./bin/rails db:migrate`.
-- Running a shell - `docker-compose exec app bash`.
+- Open the Rails console - `docker compose exec app ./bin/rails c`
+- Adding Gems - `docker compose exec app bundle add GEM_NAME` (or add the gem manually
+  to the Gemfile and run `docker compose exec app bundle install`.
+- Creating migrations - `docker compose exec app ./bin/rails g migration NAME ...`.
+- Running migrations - `docker compose exec app ./bin/rails db:migrate`.
+- Running a shell - `docker compose exec app bash`.
 
 Debug, Pry, and Byebug can be a bit tricky. You need to "attach" to Docker
 first. This can be done by running the following in it's own window:
 
 ```
-docker attach `docker-compose ls -q`-app-1
+docker attach `docker compose ls -q`-app-1
 ```
 
 The when a debugger/byebug/pry statement is reached, you're good to go.
@@ -166,7 +166,7 @@ Control-Q.
 These aliases can make it a little easy to work Rails and Docker Compose
 
 ```
-alias dc='docker-compose
+alias dc='docker compose
 alais dcb='dc exec app bundle'
 alias dcr='dcb exec rails
 alias dcs='dcb exec rspec'
@@ -177,7 +177,7 @@ With these you can start and stop with `dc up`, and `dc down` and use `dcr conso
 If you are all in with Docker Compose you could take it a step further with:
 
 ```
-alias dc='docker-compose'
+alias dc='docker compose'
 alias bundle='dc exec app bundle'
 alias rails='bundle exec rails'
 alias rspec='bundle exec rspec'
