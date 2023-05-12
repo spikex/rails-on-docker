@@ -169,7 +169,7 @@ These aliases can make it a little easy to work Rails and Docker Compose
 alias dc='docker-compose
 alais dcb='dc exec app bundle'
 alias dcr='dcb exec rails
-alias dcr='dcb exec rails'
+alias dcs='dcb exec rspec'
 ```
 
 With these you can start and stop with `dc up`, and `dc down` and use `dcr console` to get the Rails console or `dcb add GEMNAME` to add a gem.
