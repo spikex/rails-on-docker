@@ -3,12 +3,16 @@ version: "3.7"
 services:
   ngrok:
     ports:
-      - "4040:4040"
-    image: wernight/ngrok
+      - 4040:4040
+    image: ngrok/ngrok:latest
+    restart: unless-stopped
+    command:
+      - http
+      - --domain
+      - ${NGROK_SUBDOMAIN}.ngrok.io
+      - web:3000
     environment:
-      - NGROK_SUBDOMAIN=${NGROK_SUBDOMAIN}
-      - NGROK_AUTH=${NGROK_AUTH}
-      - NGROK_PORT=app:3000
+      - NGROK_AUTHTOKEN=${NGROK_AUTH}
 
   app:
     environment:
