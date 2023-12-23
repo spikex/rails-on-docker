@@ -45,6 +45,10 @@ Copy _Dockerfile_ and _docker-compose.yml_ to your Rails project along with the
 Compose files for any services you need. For example, if you will be using
 PostgreSQL, copy _docker-compose-postgres.yml_.
 
+Note: **Newer versions of Rails generate a production _Dockerfile_**, if you have
+one, move it to _Dockerfile.production_ first. Obviously, if you're using that
+_Dockerfile_ to deploy, you'll need to make some changes.
+
 ```
 cp Dockerfile docker-compose.yml docker-compose-postgres.yml /path/to/my/project
 ```
@@ -106,7 +110,15 @@ Once `rails new` completes, create/edit a _.env_ file and add:
 COMPOSE_FILE=docker-compose.yml:docker-compose-postgres.yml
 ```
 
-and edit _Dockerfile_ to pin the Ruby version to the one in your _Gemfile_
+Newer versions of Rails generate a production _Dockerfile_, move that to
+_Dockerfile.production_ and copy back the development version:
+
+```
+mv Dockerfile Dockerfile.production
+cp /path/to/rails-on-docker/Dockerfile .
+```
+
+then edit _Dockerfile_ to pin the Ruby version to the one in your _Gemfile_
 e.g. `FROM ruby` -> `FROM ruby:3.2.2`.
 
 Run:
