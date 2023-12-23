@@ -178,7 +178,7 @@ Control-Q.
 These aliases can make it a little easy to work Rails and Docker Compose
 
 ```
-alias dc='docker compose
+alias dc='docker compose'
 alais dcb='dc exec app bundle'
 alias dcr='dcb exec rails
 alias dcs='dcb exec rspec'
